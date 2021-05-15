@@ -42,7 +42,7 @@
 
 /* NOTE: custom styles */
 
-p {
+.result-image-container {
         align-content: center;
         background-color: #495285;
         color: #fff;
@@ -51,7 +51,7 @@ p {
         justify-content: center;
         min-height: 6em;
       }
-      p > span {
+      .result-image-container > span {
         opacity: 0.4;
         text-align: center;
       }

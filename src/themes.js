@@ -1,96 +1,64 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
-  Container,
-  Divider,
   Grid,
   Header,
-  Image,
-  List,
-  Segment,
-  Visibility,
 } from 'semantic-ui-react'
-function ThemesComponent({themes}) {
+import { Image, Card, Icon, Container } from 'semantic-ui-react'
 
+
+function ThemeRow({theme}){
   return (
-    <div className="ThemesComponent">
-      <Header as='h2' inverted textAlign='center'>
-      Stackable (mobile)
-      </Header>
-      <Grid columns={2} stackable>
-        <Grid.Row>
-          <Grid.Column>
-            <p />
-            yo
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-        </Grid.Row>
+    <Grid.Row>
+      <Grid.Column>
+        <Card>
+          <Card.Content header={theme.title} />
+          <Card.Content description={theme.description} />
+          <Card.Content extra>
+            <Icon name='user' />4 Friends
+          </Card.Content>
+        </Card>
+      </Grid.Column>
+      <Grid.Column>
+        <div className='result-image-container'>
+           <Image src={theme.images[0]} size='medium' />
+        </div>
+      </Grid.Column>
+      <Grid.Column>
+        <div className='result-image-container'>
+           <Image src={theme.images[1]} size='medium' />
+        </div>
+      </Grid.Column>
+    </Grid.Row>
+  )
+}
 
-        <Grid.Row>
-          <Grid.Column>
-            <p />
-            yo
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-        </Grid.Row>
+function ThemesComponent({state,dispatch}) {
 
-        <Grid.Row>
-          <Grid.Column>
-            <p />
-            yo
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-        </Grid.Row>
+  if (state.results.length){
+    return (
+      <div className="ThemesComponent">
+        <Header as='h2' inverted textAlign='center'>
+        Stackable (mobile)
+        </Header>
+        <Container>
+          <Grid columns={3} stackable>
+            {
+              state.results.map((theme,i)=>{
+                return(
+                  <ThemeRow key={i} theme={theme}/>
+                )
+              })
+            }
+          </Grid>
+        </Container>
+      </div>
+    );
+  }else{
+    return(
+      <h1>Loading</h1>
+    )
+  }
 
-        <Grid.Row>
-          <Grid.Column>
-            <p />
-            yo
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column>
-            <p />
-            yo
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column>
-            <p />
-            yo
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-          <Grid.Column>
-            <p />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </div>
-  );
 }
 
 export default ThemesComponent;

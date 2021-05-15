@@ -8,7 +8,7 @@ import {
 
 import SearchComponent from './search-component'
 
-function MenuComponent({menuFixed}) {
+function MenuComponent({menuFixed, state, dispatch}) {
   const menuStyle = {
     border: 'none',
     borderRadius: 0,
@@ -34,7 +34,9 @@ function MenuComponent({menuFixed}) {
           <Image size='mini' src='/camera.svg' />
         </Menu.Item>
         <Menu.Item header>Atom Theme Gallery</Menu.Item>
-        <SearchComponent/>
+        <Menu.Item>
+        <SearchComponent state={state} dispatch={dispatch}/>
+        </Menu.Item>
 
         <Menu.Menu position='right'>
           <Dropdown text='Dropdown' pointing className='link item'>

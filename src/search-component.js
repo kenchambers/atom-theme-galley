@@ -1,43 +1,27 @@
 import _ from 'lodash'
-import faker from 'faker'
 import React from 'react'
-import { Search, Grid, Header, Segment } from 'semantic-ui-react'
+import { Search } from 'semantic-ui-react'
+import faker from 'faker'
+
+
+// ==============
+// ENDPOINTS:
+// ==============
 
 const source = _.times(5, () => ({
   title: faker.company.companyName(),
   description: faker.company.catchPhrase(),
   image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
 }))
 
-const initialState = {
-  loading: false,
-  results: [],
-  value: '',
-}
 
-function exampleReducer(state, action) {
-  switch (action.type) {
-    case 'CLEAN_QUERY':
-      return initialState
-    case 'START_SEARCH':
-      return { ...state, loading: true, value: action.query }
-    case 'FINISH_SEARCH':
-      return { ...state, loading: false, results: action.results }
-    case 'UPDATE_SELECTION':
-      return { ...state, value: action.selection }
 
-    default:
-      throw new Error()
-  }
-}
-
-function SearchComponent() {
-  const [state, dispatch] = React.useReducer(exampleReducer, initialState)
-  const { loading, results, value } = state
+function SearchComponent({state, dispatch}) {
+  const { loading, searchResults, searchValue } = state
 
   const timeoutRef = React.useRef()
   const handleSearchChange = React.useCallback((e, data) => {
+
     clearTimeout(timeoutRef.current)
     dispatch({ type: 'START_SEARCH', query: data.value })
 
@@ -47,12 +31,13 @@ function SearchComponent() {
         return
       }
 
+      // api request goes here:
       const re = new RegExp(_.escapeRegExp(data.value), 'i')
       const isMatch = (result) => re.test(result.title)
 
       dispatch({
         type: 'FINISH_SEARCH',
-        results: _.filter(source, isMatch),
+        searchResults: _.filter(source, isMatch),
       })
     }, 300)
   }, [])
@@ -70,8 +55,8 @@ function SearchComponent() {
         dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
       }
       onSearchChange={handleSearchChange}
-      results={results}
-      value={value}
+      results={searchResults}
+      value={searchValue}
     />
     </>
 

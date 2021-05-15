@@ -1,14 +1,11 @@
 import React from 'react'
 
 import {
-  Container,
   Divider,
   Grid,
   Header,
   Image,
   List,
-  Segment,
-  Visibility,
 } from 'semantic-ui-react'
 function MenuDropdownComponent(){
   return (
