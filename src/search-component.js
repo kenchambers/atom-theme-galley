@@ -1,65 +1,57 @@
 import _ from 'lodash'
 import React from 'react'
-import { Search } from 'semantic-ui-react'
+import { Icon, Input } from 'semantic-ui-react'
 import faker from 'faker'
+import { useHistory, useLocation } from "react-router-dom";
 
 
 // ==============
 // ENDPOINTS:
 // ==============
-
-const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
+// NOTE: fake data initial results
+const source = _.times(10, () => ({
+    title: faker.company.companyName(),
+    stars: 5,
+    downloads: faker.datatype.number(),
+    github_url: faker.internet.url(),
+    images: [
+      faker.image.people(),
+      faker.image.people(),
+      faker.image.people(),
+    ],
 }))
-
-
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 function SearchComponent({state, dispatch}) {
-  const { loading, searchResults, searchValue } = state
+  let history = useHistory();
+  let query = useQuery();
 
-  const timeoutRef = React.useRef()
-  const handleSearchChange = React.useCallback((e, data) => {
+  let queryURLParam = query.get("q")
 
-    clearTimeout(timeoutRef.current)
-    dispatch({ type: 'START_SEARCH', query: data.value })
 
-    timeoutRef.current = setTimeout(() => {
-      if (data.value.length === 0) {
-        dispatch({ type: 'CLEAN_QUERY' })
-        return
-      }
 
-      // api request goes here:
-      const re = new RegExp(_.escapeRegExp(data.value), 'i')
-      const isMatch = (result) => re.test(result.title)
+  const { searchValue } = state
 
-      dispatch({
-        type: 'FINISH_SEARCH',
-        searchResults: _.filter(source, isMatch),
-      })
-    }, 300)
+  const handleSearchChange = React.useCallback((e) => {
+    dispatch({ type: 'START_SEARCH', query: e.target.value })
   }, [])
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timeoutRef.current)
+
+  const onSubmit = (e) => {
+    // async request goes here
+    if (e.key === 'Enter') {
+      history.push(`/?q=${searchValue}`)
+      // console.log("CHEEB");
+      // onSubmit()
     }
-  }, [])
+  }
 
   return (
-    <>
-    <Search
-      loading={loading}
-      onResultSelect={(e, data) =>
-        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
-      }
-      onSearchChange={handleSearchChange}
-      results={searchResults}
-      value={searchValue}
-    />
-    </>
-
+    <Input icon placeholder='Search...'>
+      <input value={searchValue} onChange={handleSearchChange} onKeyPress={onSubmit}/>
+      <Icon onClick={onSubmit} name='search' />
+    </Input>
   )
 }
 

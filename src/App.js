@@ -14,14 +14,15 @@ import faker from 'faker'
 
 // NOTE: fake data initial results
 const source = _.times(10, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  images: [
-    faker.image.fashion(),
-    faker.image.nightlife(),
-    faker.image.people(),
-  ]
-
+    title: faker.company.companyName(),
+    stars: 5,
+    downloads: faker.datatype.number(),
+    github_url: faker.internet.url(),
+    images: [
+      faker.image.people(),
+      faker.image.people(),
+      faker.image.people(),
+    ],
 }))
 
 
@@ -38,7 +39,7 @@ function exampleReducer(state, action) {
     case 'CLEAN_QUERY':
       return initialState
     case 'START_SEARCH':
-      console.log("START_SEARCH");
+
       return { ...state, loading: true, searchValue: action.query }
     case 'FINISH_SEARCH':
     console.log("FINISH");
@@ -47,6 +48,7 @@ function exampleReducer(state, action) {
     console.log("UPDATE");
       return { ...state, value: action.selection }
     case 'UPDATE_RESULTS':
+      console.log(action.results);
       return { ...state, results: action.results }
 
     default:

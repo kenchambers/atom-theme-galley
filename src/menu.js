@@ -28,14 +28,15 @@ function MenuComponent({menuFixed, state, dispatch}) {
       borderless
       fixed={menuFixed ? 'top' : undefined}
       style={menuFixed ? fixedMenuStyle : menuStyle}
+      fluid widths={3}
     >
       <Container text>
+
         <Menu.Item>
           <Image size='mini' src='/camera.svg' />
         </Menu.Item>
-        <Menu.Item header>Atom Theme Gallery</Menu.Item>
         <Menu.Item>
-        <SearchComponent state={state} dispatch={dispatch}/>
+          <SearchComponent state={state} dispatch={dispatch}/>
         </Menu.Item>
 
         <Menu.Menu position='right'>

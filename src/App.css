@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,20 +9,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -41,6 +24,22 @@
 
 
 /* NOTE: custom styles */
+
+/* https://www.mixfont.com/shadows */
+.main-header {
+  color: #EBA89F;
+  font-size: 4em;
+  font-family: 'Fugaz One';
+  text-shadow: -.030em .030em #EBA89F, -.08em .08em #2E2B32;
+  /* text-shadow: -.2em .2em #242B2E; */
+
+}
+.secondary-header {
+  background: #FFF6E6;
+  color: #F77683;
+  font-family: Comfortaa;
+  text-shadow: -.030em .030em #FFF6E6, -.08em .08em #E7DCD7;
+}
 
 .result-image-container {
         align-content: center;

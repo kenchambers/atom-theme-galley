@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import MenuComponent from './menu'
 import MenuDropdownComponent from './menu-dropdown'
 import ThemesComponent from './themes'
+
 import {
   Container,
   Header,
@@ -38,10 +39,9 @@ export default class StickyLayout extends Component {
         </style>
 
         <Container text style={{ marginTop: '2em' }}>
-          <Header as='h1'>Atom Theme Gallery</Header>
+          <div className="main-header">Atom Theme Gallery</div>
           <Segment>
-            This example shows how to use lazy loaded images, a sticky menu, and a simple text
-            container
+            Because it's so much easier this way.
           </Segment>
         </Container>
 
@@ -57,7 +57,7 @@ export default class StickyLayout extends Component {
         </Visibility>
 
         {/* NOTE: CONTAINER WITH THE PAGE */}
-        <Container text>
+        <Container style={{width: '80vw'}}>
           <ThemesComponent state={state} dispatch={dispatch}/>
         </Container>
 
