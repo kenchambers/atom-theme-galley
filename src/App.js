@@ -1,79 +1,54 @@
 import React from 'react'
-import _ from 'lodash'
 
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import StickyLayout from './sticky-layout'
-import faker from 'faker'
+import {  useLocation } from "react-router-dom";
+import API from './api'
+import { useStore, StoreContext } from './store-hook';
+const api = new API()
 
 
-// ==============
-// ENDPOINTS:
-// ==============
 
 
-// NOTE: fake data initial results
-const source = _.times(10, () => ({
-    title: faker.company.companyName(),
-    stars: 5,
-    downloads: faker.datatype.number(),
-    github_url: faker.internet.url(),
-    images: [
-      faker.image.people(),
-      faker.image.people(),
-      faker.image.people(),
-    ],
-}))
-
-
-const initialState = {
-  loading: false,
-  searchResults: [],
-  searchValue: '',
-  pageResults:[],
-  results: [],
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
 }
-
-function exampleReducer(state, action) {
-  switch (action.type) {
-    case 'CLEAN_QUERY':
-      return initialState
-    case 'START_SEARCH':
-
-      return { ...state, loading: true, searchValue: action.query }
-    case 'FINISH_SEARCH':
-    console.log("FINISH");
-      return { ...state, loading: false, searchResults: action.searchResults }
-    case 'UPDATE_SELECTION':
-    console.log("UPDATE");
-      return { ...state, value: action.selection }
-    case 'UPDATE_RESULTS':
-      console.log(action.results);
-      return { ...state, results: action.results }
-
-    default:
-      throw new Error()
-  }
-}
-
-
 
 function App() {
-  const [state, dispatch] = React.useReducer(exampleReducer, initialState)
+
+  let query = useQuery();
+
+  let queryURLParam = query.get("q")
+
+  // const dispatch = useContext(DispatchContext);
+
+  const { dispatch, state } = useStore()
+
+
+
 
   React.useEffect(()=>{
-    console.log("yo");
+    let response = api.getSearchQuery(queryURLParam)
+
+    dispatch({
+      type: 'UPDATE_QUERY_PARAMS',
+      queryParams: queryURLParam,
+    })
 
     dispatch({
       type: 'UPDATE_RESULTS',
-      results: source,
+      results: response,
     })
-  },[])
+  },[ queryURLParam, dispatch ])
 
   return (
-    <div className="App">
-      <StickyLayout state={state} dispatch={dispatch}/>
-    </div>
+    <StoreContext>
+      <div className="App">
+        <StickyLayout/>
+      </div>
+    </StoreContext>
+
   );
 }
 

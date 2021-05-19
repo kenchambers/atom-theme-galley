@@ -1,14 +1,12 @@
 import React from 'react';
 import {
   Container,
-  Dropdown,
-  Image,
   Menu,
 } from 'semantic-ui-react'
 
 import SearchComponent from './search-component'
 
-function MenuComponent({menuFixed, state, dispatch}) {
+function MenuComponent({menuFixed}) {
   const menuStyle = {
     border: 'none',
     borderRadius: 0,
@@ -28,36 +26,12 @@ function MenuComponent({menuFixed, state, dispatch}) {
       borderless
       fixed={menuFixed ? 'top' : undefined}
       style={menuFixed ? fixedMenuStyle : menuStyle}
-      fluid widths={3}
+      fluid widths={1}
     >
       <Container text>
-
         <Menu.Item>
-          <Image size='mini' src='/camera.svg' />
+          <SearchComponent fluid size="large"/>
         </Menu.Item>
-        <Menu.Item>
-          <SearchComponent state={state} dispatch={dispatch}/>
-        </Menu.Item>
-
-        <Menu.Menu position='right'>
-          <Dropdown text='Dropdown' pointing className='link item'>
-            <Dropdown.Menu>
-              <Dropdown.Item>List Item</Dropdown.Item>
-              <Dropdown.Item>List Item</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Header>Header Item</Dropdown.Header>
-              <Dropdown.Item>
-                <i className='dropdown icon' />
-                <span className='text'>Submenu</span>
-                <Dropdown.Menu>
-                  <Dropdown.Item>List Item</Dropdown.Item>
-                  <Dropdown.Item>List Item</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown.Item>
-              <Dropdown.Item>List Item</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
       </Container>
     </Menu>
   )

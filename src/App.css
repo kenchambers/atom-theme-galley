@@ -35,7 +35,9 @@
 
 }
 .secondary-header {
-  background: #FFF6E6;
+  /* background: #FFF6E6; */
+  font-size: 2em;
+
   color: #F77683;
   font-family: Comfortaa;
   text-shadow: -.030em .030em #FFF6E6, -.08em .08em #E7DCD7;
