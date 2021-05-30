@@ -1,31 +1,32 @@
-import React, {useContext, DispatchContext, StateContext}  from 'react'
+import React  from 'react'
 import {
   Grid,
-  Header,
 } from 'semantic-ui-react'
 import { Image, Card, Label, Icon, Container, Button } from 'semantic-ui-react'
-import {useStore} from './store-hook';
+import {useStoreContext} from './store-hook';
 
 
 function ThemeRow({theme}){
 
+
   return (
     <>
       <Grid.Row>
-        <Card centered fluid>
-          <Card.Content>
-            <div style={{fontFamily: 'Comfortaa', fontSize: '3em', color: '#9fa46f', padding: '1em'}}>{theme.title}</div>
-          </Card.Content>
-          <Card.Content extra>
-            <Label size="large">
-              <Icon name='star' /> 23
-            </Label>
-            <Button content='github' icon='github' labelPosition='left' />
+        <Grid.Column>
+          <div style={{ lineHeight: 1,fontFamily: 'Comfortaa', fontSize: '2em', color: '#61c0bf', padding: '1em'}}>{theme.title}</div>
+          <Label size="large">
+            <Icon name='star' /> 23
+          </Label>
+          <Button content='github' icon='github' labelPosition='left' />
             <Label size="large">
               <Icon name='cloud download' /> 23
             </Label>
-          </Card.Content>
-        </Card>
+        </Grid.Column>
+        <Grid.Column>
+          <div className='result-image-container'>
+             <Image src={theme.images[0]} size='huge' />
+          </div>
+        </Grid.Column>
       </Grid.Row>
       <Grid.Row>
         <Grid.Column>
@@ -35,34 +36,41 @@ function ThemeRow({theme}){
         </Grid.Column>
         <Grid.Column>
           <div className='result-image-container'>
-             <Image src={theme.images[1]} size='huge' />
-          </div>
-        </Grid.Column>
-        <Grid.Column>
-          <div className='result-image-container'>
-             <Image src={theme.images[2]} size='huge' />
+             <Image src={theme.images[0]} size='huge' />
           </div>
         </Grid.Column>
       </Grid.Row>
+      <Grid.Row>
+        <Card centered fluid>
+          <Card.Content>
 
+          </Card.Content>
+        </Card>
+      </Grid.Row>
     </>
-
   )
+
 }
 
 function ThemesComponent() {
-  // const {state, dispatch} = useStore()
+  // const dispatch = useContext(DispatchContext);
+  // const state = useContext(StateContext);
+  // const {state} = useStoreContext()
+  const {state} = useStoreContext()
+  console.log("-------------");
+  console.log(state);
+  console.log("--------------");
   // const dispatch = useContext(DispatchContext);
   // const state = useContext(StateContext)
 
-  const { dispatch, state } = useStore()
+  // const { dispatch, state } =
 
   if (state.results){
     return (
       <div className="ThemesComponent">
         <Container fluid={true}>
 
-          <Grid verticalAlign={'middle'} columns={3} stackable>
+          <Grid verticalAlign={'middle'} columns={2} stackable>
             {
               state.results.map((theme,i)=>{
                 return(

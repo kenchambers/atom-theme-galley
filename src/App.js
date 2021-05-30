@@ -5,15 +5,14 @@ import 'semantic-ui-css/semantic.min.css'
 import StickyLayout from './sticky-layout'
 import {  useLocation } from "react-router-dom";
 import API from './api'
-import { useStore, StoreContext } from './store-hook';
+import { useStoreReducer, DispatchContext, StateContext } from './store-hook';
 const api = new API()
-
-
 
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
 
 function App() {
 
@@ -21,12 +20,7 @@ function App() {
 
   let queryURLParam = query.get("q")
 
-  // const dispatch = useContext(DispatchContext);
-
-  const { dispatch, state } = useStore()
-
-
-
+  const {state,dispatch} = useStoreReducer()
 
   React.useEffect(()=>{
     let response = api.getSearchQuery(queryURLParam)
@@ -43,11 +37,13 @@ function App() {
   },[ queryURLParam, dispatch ])
 
   return (
-    <StoreContext>
+    <DispatchContext.Provider value={dispatch}>
+      <StateContext.Provider value={state}>
       <div className="App">
         <StickyLayout/>
       </div>
-    </StoreContext>
+    </StateContext.Provider>
+  </DispatchContext.Provider>
 
   );
 }

@@ -1,6 +1,19 @@
 import faker from 'faker'
 import _ from 'lodash'
 
+// schema
+// [
+//   {
+//     title: 'sdfsdf',
+//     stars: 2,
+//     downloads: 1,
+//     github_url: 'https://gay.com'
+//     images: [
+//       'https://killme.com',
+//       'https://existanceispain.com'
+//     ]
+//   }
+// ]
 
 
 // NOTE: fake data initial results

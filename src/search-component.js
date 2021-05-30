@@ -3,7 +3,7 @@ import React from 'react'
 import { Icon, Input } from 'semantic-ui-react'
 // import faker from 'faker'
 import { useHistory } from "react-router-dom";
-import { useStore } from './store-hook';
+import { useStoreContext } from './store-hook';
 
 
 // ==============
@@ -25,7 +25,9 @@ import { useStore } from './store-hook';
 
 
 function SearchComponent() {
-  const {state,dispatch} = useStore()
+  // const state = useContext(StateContext)
+  // const dispatch = useContext(DispatchContext)
+  const {state,dispatch} = useStoreContext()
 
   let history = useHistory();
 
@@ -46,7 +48,7 @@ function SearchComponent() {
   }
 
   return (
-    <Input icon placeholder='Search...'>
+    <Input icon placeholder='Search...' style={{padding: 10, backgroundColor: '#bbded6'}}>
       <input size="massive" value={searchValue} onChange={handleSearchChange} onKeyPress={onSubmit}/>
       <Icon onClick={onSubmit} name='search' />
     </Input>

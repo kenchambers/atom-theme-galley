@@ -1,19 +1,42 @@
 // USAGE:
 
-// first import :
-
-// import { useStore, StoreContext } from './store-hook';
-
-
 // first wrap top most component with :
 
-// <StoreContext>
-//  <App/>
-// </StoreContext>
+// <DispatchContext.Provider value={dispatch}>
+//   <StateContext.Provider value={state}>
+//   <div className="App">
+//     ...
+//   </div>
+// </StateContext.Provider>
+// </DispatchContext.Provider>
 
 // and then in your components use the hook :
+// first import :
 
-// const {state,dispatch} = useStore()
+// import { useStoreContext } from './store-hook';
+// const {state } = useStoreContext()
+// this will give you the state of the store
+
+// IF you want to dispatch an action do this in your component:
+
+// import { useStoreReducer } from './store-hook';
+// const {state,dispatch} = useStoreReducer()
+
+
+// React.useEffect(()=>{
+//   let response = api.getSearchQuery(queryURLParam)
+//
+//   dispatch({
+//     type: 'UPDATE_QUERY_PARAMS',
+//     queryParams: queryURLParam,
+//   })
+//
+//   dispatch({
+//     type: 'UPDATE_RESULTS',
+//     results: response,
+//   })
+// },[ queryURLParam, dispatch ])
+
 
 
 
@@ -29,6 +52,7 @@
 
 
 import React, {useContext, useReducer} from 'react'
+
 
 const initialState = {
   loading: false,
@@ -64,51 +88,21 @@ function Reducer(state, action) {
   }
 }
 
+
 export const StateContext = React.createContext();
 export const DispatchContext = React.createContext();
 
-const Store = ({children}) => {
-  const [state, dispatch] = useReducer(Reducer, initialState)
-
-
-
-  return (
-    <DispatchContext.Provider value={dispatch}>
-      <StateContext.Provider value={state}>
-      {children}
-      </StateContext.Provider>
-    </DispatchContext.Provider>
-  )
-}
-
-export class StoreContext extends React.Component {
-
-    render() {
-        return (
-            <Store>
-              {this.props.children}
-              {/* {React.cloneElement(this.props.children)} */}
-            </Store>
-        )
-    }
-}
-
-
-
-
-export const useStore = function () {
-  const [state, dispatch] = useReducer(Reducer, initialState)
-
-  // STOPPED HERE FOR SOME REASON DISPATCH IS NOT TRIGGERING OUR REDUCEr
-  // const dispatch = useContext(DispatchContext);
-  // const state = useContext(StateContext)
-
-
-  if (state && dispatch) {
+export const useStoreReducer = function () {
+    const [state, dispatch] = useReducer(Reducer, initialState)
     return { dispatch, state }
-  } else {
-    return { dispatch: ()=>{}, state: {}}
-  }
 
 }
+
+export const useStoreContext = function () {
+  const dispatch = useContext(DispatchContext);
+  const state = useContext(StateContext)
+
+  return { dispatch, state }
+}
+
 
