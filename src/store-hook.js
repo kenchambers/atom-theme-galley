@@ -1,6 +1,12 @@
 // USAGE:
 
-// first wrap top most component with :
+// first wrap top most component with :,
+// then inside the same file do this:
+
+// this will instantiate state and pass the store into the context
+// import { useStoreReducer } from './store-hook';
+
+// const {state,dispatch} = useStoreReducer()
 
 // <DispatchContext.Provider value={dispatch}>
 //   <StateContext.Provider value={state}>
@@ -50,8 +56,25 @@
 // const DispatchContext = createContext();
 
 
-
 import React, {useContext, useReducer} from 'react'
+
+
+const CanThisComponent = (props) => {
+    if (props.display) {
+        return <p>This text is displayed</p>
+    }
+}
+
+class MyComponent extends React.Component {
+    render() {
+        return (
+            <CanThisComponent display={true} />
+        )
+    }
+}
+
+
+
 
 
 const initialState = {
@@ -75,12 +98,12 @@ function Reducer(state, action) {
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection }
     case 'UPDATE_RESULTS':
-    console.log("UPDATE RESULTS FIRING");
+    // console.log("UPDATE RESULTS FIRING");
     // FOR SOME REASON STORE IS NOT FIRING DISPATCH
 
       return { ...state, results: action.results }
     case 'UPDATE_QUERY_PARAMS':
-      console.log("UPDATE QUERY PARAMS FIRING")
+      // console.log("UPDATE QUERY PARAMS FIRING")
       return { ...state, queryParams: action.queryParams }
 
     default:
@@ -102,7 +125,7 @@ export const useStoreContext = function () {
   const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext)
 
-  return { dispatch, state }
+  return { state, dispatch }
 }
 
 

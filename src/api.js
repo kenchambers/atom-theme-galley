@@ -1,5 +1,6 @@
 import faker from 'faker'
 import _ from 'lodash'
+import axios from 'axios'
 
 // schema
 // [
@@ -29,13 +30,53 @@ const dummyResponse = _.times(10, () => ({
     ],
 }))
 
+// const url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
+const url = 'https://atom-themes-gallery.onrender.com/return_themes_list'
+
 export default class API {
   // server URI goes here
 
   SERVER_API_HTTP = 'google.com'
 
+  contactServer = async () => {
+    // let headers = new Headers()
+    // headers.append("Content-Type", "application/json");
+    const res = await axios.get(url, {headers: {
+      'Access-Control-Allow-Origin' : '*',
+    },responseType: 'json'});
+
+    // res.headers['content-type']; // 'text/html; charset=utf-8'
+
+
+    let body = res.data; // '... <h1>Herman Melville - Moby-D
+    // console.log(body);
+    // let response = await fetch(url, {
+    //   method: 'GET',
+    //   headers: headers,
+    //   mode: 'no-cors'
+    // })
+    // .then((res) => {
+    //   console.log(JSON.parse(res).json());
+    //   // return res.json()
+    // }).then((body) => {
+    //   console.log("----------");
+    //   console.log(body);
+    //   console.log("----------");
+    //
+    // })
+
+    // let body = await response.json()
+    // let result = await body
+    return body
+
+  }
+
   getSearchQuery = (queryParam = null) => {
-    return dummyResponse
+
+
+
+
+    return this.contactServer()
   }
 
   // getSearchQuery = async (params) => {

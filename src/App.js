@@ -5,14 +5,12 @@ import 'semantic-ui-css/semantic.min.css'
 import StickyLayout from './sticky-layout'
 import {  useLocation } from "react-router-dom";
 import API from './api'
-import { useStoreReducer, DispatchContext, StateContext } from './store-hook';
+import { useStoreReducer, DispatchContext, StateContext, useStoreContext } from './store-hook';
 const api = new API()
-
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-
 
 function App() {
 
@@ -24,6 +22,15 @@ function App() {
 
   React.useEffect(()=>{
     let response = api.getSearchQuery(queryURLParam)
+    // let response = async function(){
+    //   let body = await api.getSearchQuery(queryURLParam)
+    //   console.log("________________");
+    //     console.log(body);
+    //     console.log("________________");
+    //
+    // }
+    //
+    //
 
     dispatch({
       type: 'UPDATE_QUERY_PARAMS',
@@ -49,13 +56,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-

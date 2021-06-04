@@ -20,21 +20,92 @@
   }
 }
 
+/* semantic overrides: */
 
+.card {
+  background-color: #435058 !important;
+  border-radius: 0px !important;
+  border: 0px !important;
+}
 
+.theme-divider {
+  height: 5vh;
+  width: 100vw;
+  /* border: 4px solid red; */
+  background-color: #344046;
+}
+
+.shadow {
+    box-shadow: 0 10px 40px -10px rgb(17 21 23 / 60%);
+    transition: box-shadow .3s;
+}
 
 /* NOTE: custom styles */
 
 /* https://www.mixfont.com/shadows */
-.main-header {
-  color: #EBA89F;
-  font-size: 4em;
-  font-family: 'Fugaz One';
-  text-shadow: -.030em .030em #EBA89F, -.08em .08em #2E2B32;
-  /* text-shadow: -.2em .2em #242B2E; */
+
+
+/* STYLES FOR HEADER: */
+/* https://codepen.io/fluxus/pen/jEwaYK */
+
+.wrapper{
+	max-width: 53.33rem;
+	margin: 0 auto;
+	position: relative;
+	z-index: 10;
+	transform: translateY(-50%);
+	top:50%;
+	text-align: center;
+}
+.thin{font-weight: 100;}
+.light{font-weight: 300;}
+.regular{font-weight: 400;}
+.bold{font-weight: 700;}
+.italic{font-style: italic;}
+.normal{font-style: normal;}
+.ls-small{letter-spacing: 2px;}
+.ls-medium{letter-spacing: 4px;}
+.ls-large{letter-spacing: 8px;}
+.ls-xlarge{letter-spacing: 12px;}
+.uppercase{text-transform: uppercase;}
+
+
+/* TOP */
+.gamma {
+  font-size: 3.3rem; /* 36 / 18 = 2 */
+  margin-bottom: 0.825rem;
+  color: #F1F2EE;
+}
+/* MIDDLE */
+.open-sans{
+  font-family: 'Open Sans';
+  font-size: 5.3rem; /* 36 / 18 = 2 */
+  color: #DCF763;
+}
+/* BOTTOM */
+.epsilon {
+  font-size: 1.4rem; /* 21 / 18 = 1.1667 */
+
+  /* margin-bottom: 1.41429rem; */
+  color: #F1F2EE;
 
 }
-.secondary-header {
+.lato{font-family: 'Lato'}
+
+.top-header {
+  /* font-size: 4em; */
+
+}
+.middle-header {
+  /* color: #EBA89F; */
+  /* font-size: 2em; */
+  /* padding-top: 2em; */
+  /* font-family: 'Fugaz One'; */
+  /* text-shadow: -.030em .030em #EBA89F, -.08em .08em #2E2B32; */
+  /* text-shadow: -.2em .2em #242B2E; */
+}
+
+.bottom-header {
   /* background: #FFF6E6; */
   font-size: 2em;
 

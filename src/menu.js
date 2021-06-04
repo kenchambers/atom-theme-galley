@@ -16,10 +16,10 @@ function MenuComponent({menuFixed}) {
     transition: 'box-shadow 0.5s ease, padding 0.5s ease'
   }
   const fixedMenuStyle = {
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
+    backgroundColor: '#435058',
     boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)'
   }
+
 
   return (
     <Menu

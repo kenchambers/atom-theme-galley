@@ -26,9 +26,14 @@ export default function StickyLayout (props){
     <div>
 
 
-      <Container text style={{ paddingTop: '6em', display: 'block', marginBottom: '3em' }}>
-        <div className="main-header">Atom Theme Gallery</div>
-          <div className="secondary-header">Because it's so much easier this way.</div>
+      <Container text style={{ paddingTop: '15em', display: 'block', marginBottom: '3em' }}>
+        <div className="wrapper">
+        	 <h1 className="gamma lato thin uppercase ls-xlarge">
+        		 ATOM THEME<br/>
+        		 <span className="middle-header open-sans tera ls-xlarge bold">GALLERY</span><br/>
+        		 <span className="epsilon ls-medium">Becase it's easier this way.</span>
+           </h1>
+        	 </div>
       </Container>
 
       {/* Attaching the top menu is a simple operation, we only switch `fixed` prop and add another style if it has
