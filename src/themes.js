@@ -29,7 +29,7 @@ function ThemeRow({theme}){
           </Label>
           <Button content='github' icon='github' labelPosition='left' />
             <Label size="large">
-              <Icon name='cloud download' /> {parseInt(theme.downloads)}
+              <Icon name='cloud download' /> {theme.downloads}
             </Label>
         </Grid.Column>
         <Grid.Column>
