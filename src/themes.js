@@ -4,6 +4,12 @@ import {
 } from 'semantic-ui-react'
 import { Image, Card, Label, Icon, Container, Button } from 'semantic-ui-react'
 import {useStoreContext, useStoreReducer} from './store-hook';
+import { useHistory, useLocation } from "react-router-dom";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 // import * as blobs2 from "blobs/v2";
 // import * as blobs2Animate from "blobs/v2/animate";
 // const svgPath = blobs2.svgPath({
@@ -90,12 +96,37 @@ function PlaceHolder () {
 }
 
 function ThemesComponent() {
-  const {state: {pageNumbsers, results}} = useStoreContext()
+  const {state: {pageNumbers, results, currentPage, queryParams}} = useStoreContext()
+  let history = useHistory();
+  let query = useQuery();
+
+
+  // console.log('~~~~~~>',pageNumbers);
+  let arrayOfNumbers = []
 
 
 
+  if (pageNumbers){
+    for (var i = 0; i < pageNumbers; i++) {
+      arrayOfNumbers.push(i + 1)
+    }
+  }
+
+
+
+
+  const pageClick = (page) => {
+
+    // async request goes here
+    // let pageURLParam = query.get("p")
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const myParam = urlParams.get('p');
+
+      history.replace(`/?q=${queryParams}` + `&p=${page}`)
+  }
 
   if (results.length){
+
     return (
       <div className="ThemesComponent">
         <Container fluid={true}>
@@ -109,9 +140,21 @@ function ThemesComponent() {
             }
           </Grid>
           <div className="page-button-container">
-              <a class="ui blue circular label">1</a>
-              <a class="ui blue circular label">2</a>
-              <a class="ui blue circular label">3</a>
+            {
+              arrayOfNumbers.length &&
+              arrayOfNumbers.map((page,i)=>{
+                if (currentPage == page) {
+                  return(
+                    <a style={{backgroundColor: '#ffffff', color: '#333333'}}  key={i} onClick={() => pageClick(page)} className="ui circular label">{page}</a>
+                  )
+                } else {
+                  return(
+                    <a  key={i} onClick={() => pageClick(page)} className="ui olive circular label">{page}</a>
+                  )
+                }
+
+              })
+            }
           </div>
         </Container>
       </div>
