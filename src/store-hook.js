@@ -98,10 +98,8 @@ function Reducer(state, action) {
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection }
     case 'UPDATE_RESULTS':
-    // console.log("UPDATE RESULTS FIRING");
-    // FOR SOME REASON STORE IS NOT FIRING DISPATCH
 
-      return { ...state, results: action.results }
+      return { ...state, results: action.results.data}
     case 'UPDATE_QUERY_PARAMS':
       // console.log("UPDATE QUERY PARAMS FIRING")
       return { ...state, queryParams: action.queryParams }

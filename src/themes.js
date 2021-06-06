@@ -67,14 +67,16 @@ function ThemesComponent() {
   const {state} = useStoreContext()
   // const {state} = useStoreReducer()
   //
-  // console.log("-------------");
-  // console.log(state.results);
-  // console.log(state);
-  // console.log("--------------");
   // const dispatch = useContext(DispatchContext);
   // const state = useContext(StateContext)
 
   // const { dispatch, state } =
+
+  console.log("===============");
+  console.log(state);
+  console.log("===============");
+
+
 
   if (state.results){
     return (

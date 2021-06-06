@@ -2,6 +2,16 @@ import faker from 'faker'
 import _ from 'lodash'
 import axios from 'axios'
 
+var instance = axios.create({
+    baseURL: "http://localhost:3000"
+  });
+
+  // instance.get(url)
+  //     .then(function(response) {
+  //   })
+
+   // axios.defaults.timeout = 1500;
+
 // schema
 // [
 //   {
@@ -31,24 +41,42 @@ const dummyResponse = _.times(10, () => ({
 }))
 
 // const url = 'https://jsonplaceholder.typicode.com/posts/1/comments'
-const url = 'https://atom-themes-gallery.onrender.com/return_themes_list'
+const url = 'https://atom-themes-gallery.onrender.com/return_themes_list/'
 
 export default class API {
   // server URI goes here
 
-  SERVER_API_HTTP = 'google.com'
+  //
+  // let newdates = new Date();
+  // let month = newdates.getUTCMonth() + 1
+  // let day = newdates.getUTCDate()
+  // let year = newdates.getUTCFullYear()
+  // let currentDate = year + "-" + month + "-" + day
+
 
   contactServer = async () => {
     // let headers = new Headers()
     // headers.append("Content-Type", "application/json");
-    const res = await axios.get(url, {headers: {
-      'Access-Control-Allow-Origin' : '*',
-    },responseType: 'json'});
+
+
+
+
+    // const res = await axios.get(url, {headers: {
+    //   'Content-Encoding' : 'br',
+    //   'Content-Type': 'application/json',
+    //   'Referrer-Policy': 'same-origin',
+    //   'Vary': 'Accept-Encoding',
+    //   'X-Content-Type-Options': 'nosniff',
+    //   'X-Frame-Options': 'DENY',
+    //   'Transfer-Encoding': 'chunked'
+    // }});
 
     // res.headers['content-type']; // 'text/html; charset=utf-8'
 
 
-    let body = res.data; // '... <h1>Herman Melville - Moby-D
+
+
+    // let body = res.data; // '... <h1>Herman Melville - Moby-D
     // console.log(body);
     // let response = await fetch(url, {
     //   method: 'GET',
@@ -67,16 +95,26 @@ export default class API {
 
     // let body = await response.json()
     // let result = await body
-    return body
+    // return body
 
+  }
+
+  asyncFunc = async (url)=> {
+  // fetch data from a url endpoint
+  // const url = 'https://atom-themes-gallery.onrender.com/return_themes_list/'
+  //   const response = await axios.get(url);
+  //   return response.data;
   }
 
   getSearchQuery = (queryParam = null) => {
 
-
-
-
-    return this.contactServer()
+    //
+    // let response = this.asyncFunc(url).then((response)=>{
+    //   return response
+    // })
+    //
+    // return response
+    //
   }
 
   // getSearchQuery = async (params) => {
