@@ -84,6 +84,8 @@ const initialState = {
   pageResults:[],
   results: [],
   queryParams: null,
+  pageNumbers: 1,
+  currentPage: 1,
 }
 
 function Reducer(state, action) {
@@ -98,8 +100,14 @@ function Reducer(state, action) {
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection }
     case 'UPDATE_RESULTS':
+      return { ...state, results: []}
+    case 'UPDATE_PAGE_NUMBERS':
+      return { ...state, pageNumbers: action.pages}
+    case 'UPDATE_CURRENT_PAGE':
+      return { ...state, currentPage: 1}
+    case 'FINISH_UPDATE_RESULTS':
 
-      return { ...state, results: action.results.data}
+      return { ...state, results: action.results}
     case 'UPDATE_QUERY_PARAMS':
       // console.log("UPDATE QUERY PARAMS FIRING")
       return { ...state, queryParams: action.queryParams }

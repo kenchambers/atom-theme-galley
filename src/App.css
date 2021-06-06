@@ -21,6 +21,10 @@
 }
 
 /* semantic overrides: */
+.ui.placeholder, .ui.placeholder .image.header:after, .ui.placeholder .line, .ui.placeholder .line:after, .ui.placeholder>:before {
+  background-color: #435158 !important;
+}
+
 
 .card {
   background-color: #435058 !important;
@@ -79,7 +83,7 @@
 /* MIDDLE */
 .open-sans{
   font-family: 'Open Sans';
-  font-size: 5.3rem; /* 36 / 18 = 2 */
+  font-size: 4.3rem; /* 36 / 18 = 2 */
   color: #DCF763;
 }
 /* BOTTOM */

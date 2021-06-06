@@ -32,23 +32,34 @@ function ThemeRow({theme}){
               <Icon name='cloud download' /> {theme.downloads}
             </Label>
         </Grid.Column>
-        <Grid.Column>
-          <div className='result-image-container'>
-             <Image className="shadow" src={theme.images[0]} size='huge' />
-          </div>
-        </Grid.Column>
+        {
+          theme.images.length > 0 &&
+          <Grid.Column>
+            <div className='result-image-container'>
+               <Image className="shadow" src={theme.images[0]} size='huge' />
+            </div>
+          </Grid.Column>
+        }
+
       </Grid.Row>
       <Grid.Row>
-        <Grid.Column>
-          <div className='result-image-container'>
-             <Image className="shadow" src={theme.images[1]} size='huge' />
-          </div>
-        </Grid.Column>
-        <Grid.Column>
-          <div className='result-image-container'>
-             <Image className="shadow" src={theme.images[2]} size='huge' />
-          </div>
-        </Grid.Column>
+        {
+          theme.images.length > 1 &&
+          <Grid.Column>
+            <div className='result-image-container'>
+               <Image className="shadow" src={theme.images[1]} size='huge' />
+            </div>
+          </Grid.Column>
+        }
+        {
+          theme.images.length > 2 &&
+          <Grid.Column>
+            <div className='result-image-container'>
+               <Image className="shadow" src={theme.images[2]} size='huge' />
+            </div>
+          </Grid.Column>
+        }
+
       </Grid.Row>
       <Grid.Row>
         <div className="theme-divider">
@@ -60,47 +71,75 @@ function ThemeRow({theme}){
 
 }
 
+function PlaceHolder () {
+  return (
+    <div className="ui placeholder" style={{margin: 10}}>
+      <div className="image header">
+        <div className="line"></div>
+        <div className="line"></div>
+      </div>
+      <div className="paragraph">
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+      </div>
+    </div>
+  )
+}
+
 function ThemesComponent() {
-  // const dispatch = useContext(DispatchContext);
-  // const state = useContext(StateContext);
-  // const {state} = useStoreContext()
-  const {state} = useStoreContext()
-  // const {state} = useStoreReducer()
-  //
-  // const dispatch = useContext(DispatchContext);
-  // const state = useContext(StateContext)
-
-  // const { dispatch, state } =
-
-  console.log("===============");
-  console.log(state);
-  console.log("===============");
+  const {state: {pageNumbsers, results}} = useStoreContext()
 
 
 
-  if (state.results){
+
+  if (results.length){
     return (
       <div className="ThemesComponent">
         <Container fluid={true}>
           <Grid verticalAlign={'middle'} columns={2} stackable>
             {
-              state.results.map((theme,i)=>{
+              results.map((theme,i)=>{
                 return(
                   <ThemeRow key={i} theme={theme}/>
                 )
               })
             }
           </Grid>
-
+          <div className="page-button-container">
+              <a class="ui blue circular label">1</a>
+              <a class="ui blue circular label">2</a>
+              <a class="ui blue circular label">3</a>
+          </div>
         </Container>
       </div>
     );
   }else{
     return(
-      <h1>Loading</h1>
+      <Container fluid={true}>
+        <Grid verticalAlign={'middle'} columns={2} stackable>
+          <Grid.Row>
+            <Grid.Column>
+              <PlaceHolder/>
+            </Grid.Column>
+            <Grid.Column>
+              <PlaceHolder/>
+            </Grid.Column>
+            <Grid.Column>
+              <PlaceHolder/>
+            </Grid.Column>
+            <Grid.Column>
+              <PlaceHolder/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     )
   }
 
 }
 
 export default ThemesComponent;
+

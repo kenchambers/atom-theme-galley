@@ -21,22 +21,38 @@ function App() {
   const {state,dispatch} = useStoreReducer()
 
   React.useEffect(()=>{
-
-
-    dispatch({
-      type: 'UPDATE_QUERY_PARAMS',
-      queryParams: queryURLParam,
-    })
-
-    const url = 'https://atom-themes-gallery.onrender.com/return_themes_list/'
-    axios.get(url).then((res) =>{
-
+    if (queryURLParam){
+      const url = `https://atom-themes-gallery.onrender.com/return_search_result/?query=${queryURLParam}`
+      dispatch({
+        type: 'UPDATE_QUERY_PARAMS',
+        queryParams: queryURLParam,
+      })
       dispatch({
         type: 'UPDATE_RESULTS',
-        results: res,
       })
-    })
-
+      axios.get(url).then((res)=>{
+        dispatch({
+          type: 'UPDATE_PAGE_NUMBERS',
+          pageNumbers: res.data.pages
+        })
+        dispatch({
+          type: 'FINISH_UPDATE_RESULTS',
+          results: res.data.data,
+        })
+      })
+    } else {
+      const url = 'https://atom-themes-gallery.onrender.com/return_themes_list/'
+      axios.get(url).then((res) =>{
+        dispatch({
+          type: 'FINISH_UPDATE_RESULTS',
+          results: res.data,
+        })
+        // dispatch({
+        //   type: 'UPDATE_RESULTS',
+        //   results: res,
+        // })
+      })
+    }
 
   },[ queryURLParam, dispatch ])
 
