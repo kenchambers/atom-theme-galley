@@ -59,22 +59,6 @@
 import React, {useContext, useReducer} from 'react'
 
 
-const CanThisComponent = (props) => {
-    if (props.display) {
-        return <p>This text is displayed</p>
-    }
-}
-
-class MyComponent extends React.Component {
-    render() {
-        return (
-            <CanThisComponent display={true} />
-        )
-    }
-}
-
-
-
 
 
 const initialState = {

@@ -1,4 +1,4 @@
-  import React, { useState } from 'react'
+  import React from 'react'
 
 import MenuComponent from './menu'
 import MenuDropdownComponent from './menu-dropdown'
@@ -26,7 +26,7 @@ export default function StickyLayout (props){
     <div>
 
 
-      <Container text style={{ paddingTop: '15em', display: 'block', marginBottom: '3em' }}>
+      <Container text style={{ paddingTop: '15em', display: 'block', marginBottom: '1em' }}>
         <div className="wrapper">
         	 <h1 className="gamma lato thin uppercase ls-xlarge">
         		 ATOM THEME<br/>

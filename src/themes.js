@@ -2,28 +2,14 @@ import React  from 'react'
 import {
   Grid,
 } from 'semantic-ui-react'
-import { Image, Card, Label, Icon, Container, Button } from 'semantic-ui-react'
-import {useStoreContext, useStoreReducer} from './store-hook';
+import { Image,  Label, Icon, Container, Button } from 'semantic-ui-react'
+import {useStoreContext} from './store-hook';
 import { useHistory, useLocation } from "react-router-dom";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-// import * as blobs2 from "blobs/v2";
-// import * as blobs2Animate from "blobs/v2/animate";
-// const svgPath = blobs2.svgPath({
-//     seed: Math.random(),
-//     extraPoints: 13,
-//     randomness: 4,
-//     size: 2000,
-// });
-
-    // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3">
-    //   <path d={svgPath}></path>
-    // </svg>
-
-// console.log(svgPath)
 function ThemeRow({theme}){
   return (
     <>
@@ -98,13 +84,7 @@ function PlaceHolder () {
 function ThemesComponent() {
   const {state: {pageNumbers, results, currentPage, queryParams}} = useStoreContext()
   let history = useHistory();
-  let query = useQuery();
-
-
-  // console.log('~~~~~~>',pageNumbers);
   let arrayOfNumbers = []
-
-
 
   if (pageNumbers){
     for (var i = 0; i < pageNumbers; i++) {
@@ -112,16 +92,7 @@ function ThemesComponent() {
     }
   }
 
-
-
-
   const pageClick = (page) => {
-
-    // async request goes here
-    // let pageURLParam = query.get("p")
-    // const urlParams = new URLSearchParams(window.location.search);
-    // const myParam = urlParams.get('p');
-
       history.replace(`/?q=${queryParams}` + `&p=${page}`)
   }
 
@@ -145,11 +116,16 @@ function ThemesComponent() {
               arrayOfNumbers.map((page,i)=>{
                 if (currentPage == page) {
                   return(
-                    <a style={{backgroundColor: '#ffffff', color: '#333333'}}  key={i} onClick={() => pageClick(page)} className="ui circular label">{page}</a>
+                    <button key={i} onClick={() => pageClick(page)} style={{backgroundColor: '#ffffff', color: '#333333'}}  class="compact ui button">
+                      {page}
+                    </button>
+
                   )
                 } else {
                   return(
-                    <a  key={i} onClick={() => pageClick(page)} className="ui olive circular label">{page}</a>
+                    <button key={i} onClick={() => pageClick(page)} style={{backgroundColor: '#b5cc18', color: '#333333'}}  class="compact ui button olive">
+                      {page}
+                    </button>
                   )
                 }
 
@@ -161,7 +137,16 @@ function ThemesComponent() {
     );
   }else{
     return(
-      <Container fluid={true}>
+      <Container style={{marginTop: '-6em'}} fluid={true}>
+        <span  className="epsilon ls-medium">Scanning popular themes...</span><br/>
+        <div className='lds-ripple'>
+          <div>
+
+          </div>
+          <div>
+
+          </div>
+        </div>
         <Grid verticalAlign={'middle'} columns={2} stackable>
           <Grid.Row>
             <Grid.Column>

@@ -4,9 +4,7 @@ import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import StickyLayout from './sticky-layout'
 import {  useLocation } from "react-router-dom";
-import API from './api'
 import { useStoreReducer, DispatchContext, StateContext } from './store-hook';
-const api = new API()
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -23,14 +21,10 @@ function App() {
 
   React.useEffect(()=>{
 
+    let url = 'https://atom-themes-gallery.onrender.com'
+
     if (pageURLParam && queryURLParam) {
-      // console.log("1111111");
-      const url = `https://atom-themes-gallery.onrender.com/return_search_result/?query=${queryURLParam}&?page${pageURLParam}`
-      // dispatch({
-      //   type: 'UPDATE_QUERY_PARAMS',
-      //   queryParams: `?query=${queryURLParam}&?page${pageURLParam}`,
-      // })
-      // clears results for new ones
+      url += `/return_search_result/?query=${queryURLParam}&?page${pageURLParam}`
       dispatch({
         type: 'UPDATE_CURRENT_PAGE',
         currentPage: pageURLParam,
@@ -57,9 +51,7 @@ function App() {
         })
       })
     } else if (queryURLParam){
-      console.log("222222222");
-
-      const url = `https://atom-themes-gallery.onrender.com/return_search_result/?query=${queryURLParam}`
+      url += `/return_search_result/?query=${queryURLParam}`
       dispatch({
         type: 'UPDATE_QUERY_PARAMS',
         queryParams: queryURLParam,
@@ -80,18 +72,12 @@ function App() {
         })
       })
     } else {
-      console.log("333333333");
-
-      const url = 'https://atom-themes-gallery.onrender.com/return_themes_list/'
+      url += '/return_themes_list/'
       axios.get(url).then((res) =>{
         dispatch({
           type: 'FINISH_UPDATE_RESULTS',
           results: res.data,
         })
-        // dispatch({
-        //   type: 'UPDATE_RESULTS',
-        //   results: res,
-        // })
       })
     }
 

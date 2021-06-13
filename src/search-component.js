@@ -3,7 +3,7 @@ import React from 'react'
 import { Icon, Input } from 'semantic-ui-react'
 // import faker from 'faker'
 import { useHistory } from "react-router-dom";
-import { useStoreContext, useStoreReducer } from './store-hook';
+import {  useStoreReducer } from './store-hook';
 
 
 // ==============
