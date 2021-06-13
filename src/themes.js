@@ -10,25 +10,36 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+function openGithubLink(url){
+  const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+  if (newWindow) newWindow.opener = null
+}
+
 function ThemeRow({theme}){
+
   return (
     <>
       <Grid.Row>
         <Grid.Column>
           <div className="open-sans" style={{ lineHeight: 1,fontSize: '2em', padding: '1em'}}>{theme.title}</div>
+          <Button content='github' icon='github' labelPosition='left' onClick={() => openGithubLink(theme.github_url)}/>
           <Label size="large">
-            <Icon name='star' /> {parseInt(theme.stars)}
+            <Icon name='star' color='yellow' /> {parseInt(theme.stars)}
           </Label>
-          <Button content='github' icon='github' labelPosition='left' />
             <Label size="large">
-              <Icon name='cloud download' /> {theme.downloads}
+              <Icon name='cloud download' color='blue' /> {theme.downloads}
             </Label>
         </Grid.Column>
         {
           theme.images.length > 0 &&
           <Grid.Column>
             <div className='result-image-container'>
-               <Image className="shadow" src={theme.images[0]} size='huge' />
+               <Image
+                className="shadow"
+                src={theme.images[0]}
+                size='medium'
+                href={theme.images[0]}
+                target='_blank'/>
             </div>
           </Grid.Column>
         }
@@ -39,7 +50,13 @@ function ThemeRow({theme}){
           theme.images.length > 1 &&
           <Grid.Column>
             <div className='result-image-container'>
-               <Image className="shadow" src={theme.images[1]} size='huge' />
+               <Image
+                 className="shadow"
+                 src={theme.images[1]}
+                 size='huge'
+
+                 href={theme.images[0]}
+                 target='_blank'/>
             </div>
           </Grid.Column>
         }
@@ -47,7 +64,13 @@ function ThemeRow({theme}){
           theme.images.length > 2 &&
           <Grid.Column>
             <div className='result-image-container'>
-               <Image className="shadow" src={theme.images[2]} size='huge' />
+               <Image
+                 className="shadow"
+                 src={theme.images[2]}
+                 size='huge'
+
+                 href={theme.images[0]}
+                 target='_blank'/>
             </div>
           </Grid.Column>
         }
@@ -138,7 +161,7 @@ function ThemesComponent() {
   }else{
     return(
       <Container style={{marginTop: '-6em'}} fluid={true}>
-        <span  className="epsilon ls-medium">Scanning popular themes...</span><br/>
+        <span  className="epsilon ls-medium">Scanning all the themes...</span><br/>
         <div className='lds-ripple'>
           <div>
 

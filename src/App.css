@@ -88,7 +88,7 @@
 /* MIDDLE */
 .open-sans{
   font-family: 'Open Sans';
-  font-size: 4.3rem; /* 36 / 18 = 2 */
+  font-size: 4rem; /* 36 / 18 = 2 */
   color: #DCF763;
 }
 /* BOTTOM */
@@ -105,13 +105,15 @@
   /* font-size: 4em; */
 
 }
+@media only screen and (max-width: 400px)  {
+  .middle-header {
+    font-size: 0.9em;
+  }
+
+}
+
 .middle-header {
-  /* color: #EBA89F; */
-  /* font-size: 2em; */
-  /* padding-top: 2em; */
-  /* font-family: 'Fugaz One'; */
-  /* text-shadow: -.030em .030em #EBA89F, -.08em .08em #2E2B32; */
-  /* text-shadow: -.2em .2em #242B2E; */
+
 }
 
 .bottom-header {
