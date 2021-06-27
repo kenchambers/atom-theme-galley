@@ -1,5 +1,9 @@
 # atom-theme-galley
 
+for Version 2:
+apply syntax manually to code block
+https://github.com/MoOx/atom-syntax-theme-to-highlights-css
+
 # Setup:
 https://render.com/docs/deploy-create-react-app
 
